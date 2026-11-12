@@ -1,0 +1,2050 @@
+{
+  "info": {
+    "_postman_id": "65708162-a646-427e-b876-adf37a4ad96b",
+    "name": "AD01 - Microservicios Comercio Multibodega",
+    "description": "Colección integral para tres soluciones independientes. Ejecutar manualmente y en orden; no usar Collection Runner sin revisar dependencias. Las rutas y cuerpos de Catalogo e Inventario deben cotejarse con Swagger real. Movimientos y reservas pueden no admitir PUT/DELETE por reglas de negocio. Postman no conserva las ejecuciones anteriores de otra colección.  \nTodas las URL son literales (sin variables de Postman). IDs de ejemplo: revisar antes de ejecutar.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "57563900",
+    "_collection_link": "https://go.postman.co/collection/57563900-65708162-a646-427e-b876-adf37a4ad96b?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "CatalogoDB",
+      "item": [
+        {
+          "name": "01 - Categorias",
+          "item": [
+            {
+              "name": "01 - GET listar",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "https://localhost:7014/api/Categorias",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7014",
+                  "path": [
+                    "api",
+                    "Categorias"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "02 - POST crear",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 201\", function () { pm.response.to.have.status(201); });",
+                      "if (pm.response.code === 201) {",
+                      "  const j = pm.response.json();",
+                      "  if (j.idCategoria !== undefined) pm.collectionVariables.set(\"idCategoria\", j.idCategoria);",
+                      "}"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"nombre\": \"Categoría Prueba API\",\n  \"descripcion\": \"Prueba desde Postman\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://localhost:7014/api/Categorias/1",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7014",
+                  "path": [
+                    "api",
+                    "Categorias",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "03 - GET por ID",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "https://localhost:7014/api/Categorias/1",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7014",
+                  "path": [
+                    "api",
+                    "Categorias",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "04 - PUT actualizar",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"nombre\": \"Categoría Editada API\",\n  \"descripcion\": \"Actualizada desde Postman\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://localhost:7014/api/Categorias/1",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7014",
+                  "path": [
+                    "api",
+                    "Categorias",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "05 - DELETE eliminar (AL FINAL)",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "https://localhost:7014/api/Categorias/1",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7014",
+                  "path": [
+                    "api",
+                    "Categorias",
+                    "1"
+                  ]
+                },
+                "description": "Operación destructiva: ejecutar solo con registro de prueba sin dependencias. "
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "02 - Marcas",
+          "item": [
+            {
+              "name": "01 - GET listar",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "https://localhost:7014/api/Marcas",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7014",
+                  "path": [
+                    "api",
+                    "Marcas"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "02 - POST crear",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 201\", function () { pm.response.to.have.status(201); });",
+                      "if (pm.response.code === 201) {",
+                      "  const j = pm.response.json();",
+                      "  if (j.idMarca !== undefined) pm.collectionVariables.set(\"idMarca\", j.idMarca);",
+                      "}"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"nombre\": \"Marca Prueba API\",\n  \"paisOrigen\": \"Ecuador\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://localhost:7014/api/Marcas/1",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7014",
+                  "path": [
+                    "api",
+                    "Marcas",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "03 - GET por ID",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "https://localhost:7014/api/Marcas/1",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7014",
+                  "path": [
+                    "api",
+                    "Marcas",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "04 - PUT actualizar",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"nombre\": \"Marca Editada API\",\n  \"paisOrigen\": \"Ecuador\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://localhost:7014/api/Marcas/1",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7014",
+                  "path": [
+                    "api",
+                    "Marcas",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "05 - DELETE eliminar (AL FINAL)",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "https://localhost:7014/api/Marcas/1",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7014",
+                  "path": [
+                    "api",
+                    "Marcas",
+                    "1"
+                  ]
+                },
+                "description": "Operación destructiva: ejecutar solo con registro de prueba sin dependencias. "
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "03 - Productos",
+          "item": [
+            {
+              "name": "01 - GET listar",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "https://localhost:7014/api/Productos",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7014",
+                  "path": [
+                    "api",
+                    "Productos"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "02 - POST crear",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 201\", function () { pm.response.to.have.status(201); });",
+                      "if (pm.response.code === 201) {",
+                      "  const j = pm.response.json();",
+                      "  if (j.idProducto !== undefined) pm.collectionVariables.set(\"idProducto\", j.idProducto);",
+                      "}"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"idCategoria\": \"{{idCategoria}}\",\n  \"idMarca\": \"{{idMarca}}\",\n  \"nombre\": \"Producto Prueba API\",\n  \"sku\": \"POSTMAN-PRUEBA-001\",\n  \"precio\": 350.0,\n  \"estado\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://localhost:7014/api/Productos/1",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7014",
+                  "path": [
+                    "api",
+                    "Productos",
+                    "1"
+                  ]
+                },
+                "description": "Revisar nombres exactos de propiedades, valores de Estado y dependencias en Swagger."
+              },
+              "response": []
+            },
+            {
+              "name": "03 - GET por ID",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "https://localhost:7014/api/Productos/1",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7014",
+                  "path": [
+                    "api",
+                    "Productos",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "04 - PUT actualizar",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"idCategoria\": \"{{idCategoria}}\",\n  \"idMarca\": \"{{idMarca}}\",\n  \"nombre\": \"Producto Actualizado API\",\n  \"sku\": \"POSTMAN-PRUEBA-001\",\n  \"precio\": 375.0,\n  \"estado\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://localhost:7014/api/Productos/1",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7014",
+                  "path": [
+                    "api",
+                    "Productos",
+                    "1"
+                  ]
+                },
+                "description": "Revisar nombres exactos de propiedades, valores de Estado y dependencias en Swagger."
+              },
+              "response": []
+            },
+            {
+              "name": "05 - DELETE eliminar (AL FINAL)",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "https://localhost:7014/api/Productos/1",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7014",
+                  "path": [
+                    "api",
+                    "Productos",
+                    "1"
+                  ]
+                },
+                "description": "Operación destructiva: ejecutar solo con registro de prueba sin dependencias. Revisar nombres exactos de propiedades, valores de Estado y dependencias en Swagger."
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "InventarioDB",
+      "item": [
+        {
+          "name": "01 - Bodegas",
+          "item": [
+            {
+              "name": "01 GET - Listar bodegas",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "https://localhost:7137/api/Bodegas",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7137",
+                  "path": [
+                    "api",
+                    "Bodegas"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "02 POST - Crear bodega",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 201\", () => pm.response.to.have.status(201));",
+                      "const j=pm.response.json(); if(j.idBodega) pm.collectionVariables.set(\"idBodega\",j.idBodega);"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"nombre\": \"Bodega Prueba Postman\",\n  \"ciudad\": \"Quito\",\n  \"direccion\": \"Dirección de prueba\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://localhost:7137/api/Bodegas",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7137",
+                  "path": [
+                    "api",
+                    "Bodegas"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "03 GET - Bodega por ID",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "https://localhost:7137/api/Bodegas/1",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7137",
+                  "path": [
+                    "api",
+                    "Bodegas",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "04 PUT - Actualizar bodega",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"idBodega\": \"{{idBodega}}\",\n  \"nombre\": \"Bodega Prueba Actualizada\",\n  \"ciudad\": \"Quito\",\n  \"direccion\": \"Dirección actualizada\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://localhost:7137/api/Bodegas/1",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7137",
+                  "path": [
+                    "api",
+                    "Bodegas",
+                    "1"
+                  ]
+                },
+                "description": "IMPORTANTE: si el controlador exige idBodega en el body, sustituye 0 por el valor de la variable idBodega; si no, elimina ese campo."
+              },
+              "response": []
+            },
+            {
+              "name": "05 DELETE - Eliminar bodega (AL FINAL)",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "https://localhost:7137/api/Bodegas/1",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7137",
+                  "path": [
+                    "api",
+                    "Bodegas",
+                    "1"
+                  ]
+                },
+                "description": "Ejecutar al final; podría fallar si hay existencias, movimientos o reservas asociadas."
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "02 - Existencias",
+          "item": [
+            {
+              "name": "01 GET - Listar existencias",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "https://localhost:7137/api/Existencias",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7137",
+                  "path": [
+                    "api",
+                    "Existencias"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "02 POST - Crear existencia",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 201\", () => pm.response.to.have.status(201));",
+                      "const j=pm.response.json(); if(j.idExistencia) pm.collectionVariables.set(\"idExistencia\",j.idExistencia);"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"idProducto\": \"{{idProducto}}\",\n  \"idBodega\": \"{{idBodega}}\",\n  \"stock\": 20\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://localhost:7137/api/Existencias",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7137",
+                  "path": [
+                    "api",
+                    "Existencias"
+                  ]
+                },
+                "description": "Reemplaza idProducto=1 por un producto existente en Catalogo y idBodega=1 por una bodega existente; evita duplicar combinaciones producto/bodega."
+              },
+              "response": []
+            },
+            {
+              "name": "03 GET - Existencia por ID",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "https://localhost:7137/api/Existencias/1",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7137",
+                  "path": [
+                    "api",
+                    "Existencias",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "04 PUT - Actualizar existencia",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"idProducto\": \"{{idProducto}}\",\n  \"idBodega\": \"{{idBodega}}\",\n  \"stock\": 25\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://localhost:7137/api/Existencias/1",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7137",
+                  "path": [
+                    "api",
+                    "Existencias",
+                    "1"
+                  ]
+                },
+                "description": "Ajusta producto y bodega a los valores reales de la existencia creada."
+              },
+              "response": []
+            },
+            {
+              "name": "05 DELETE - Eliminar existencia (AL FINAL)",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "https://localhost:7137/api/Existencias/1",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7137",
+                  "path": [
+                    "api",
+                    "Existencias",
+                    "1"
+                  ]
+                },
+                "description": "Eliminar únicamente después de probar movimientos y reservas; verifica las reglas del controlador."
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "03 - Movimientos",
+          "item": [
+            {
+              "name": "01 GET - Listar movimientos",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "https://localhost:7137/api/MovimientosInventario",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7137",
+                  "path": [
+                    "api",
+                    "MovimientosInventario"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "02 POST - Registrar entrada",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 201\", () => pm.response.to.have.status(201));",
+                      "const j=pm.response.json(); if(j.idMovimiento) pm.collectionVariables.set(\"idMovimiento\",j.idMovimiento);"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"idProducto\": \"{{idProducto}}\",\n  \"idBodega\": \"{{idBodega}}\",\n  \"tipo\": \"Entrada\",\n  \"cantidad\": 5\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://localhost:7137/api/MovimientosInventario",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7137",
+                  "path": [
+                    "api",
+                    "MovimientosInventario"
+                  ]
+                },
+                "description": "Modifica el stock. Comprueba si tu controlador usa exactamente Entrada o ENTRADA; usar un producto/bodega existentes."
+              },
+              "response": []
+            },
+            {
+              "name": "03 GET - Movimiento por ID",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "https://localhost:7137/api/MovimientosInventario/1",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7137",
+                  "path": [
+                    "api",
+                    "MovimientosInventario",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "04 PUT - Movimiento (rechazo esperado)",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"Rechazo esperado HTTP 400\", () => pm.response.to.have.status(400));"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"idProducto\": \"{{idProducto}}\",\n  \"idBodega\": \"{{idBodega}}\",\n  \"tipo\": \"Entrada\",\n  \"cantidad\": 3\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://localhost:7137/api/MovimientosInventario/1",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7137",
+                  "path": [
+                    "api",
+                    "MovimientosInventario",
+                    "1"
+                  ]
+                },
+                "description": "El controlador que construimos rechaza modificar movimientos históricos (400)."
+              },
+              "response": []
+            },
+            {
+              "name": "05 DELETE - Movimiento (rechazo esperado)",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"Rechazo esperado HTTP 400\", () => pm.response.to.have.status(400));"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "https://localhost:7137/api/MovimientosInventario/1",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7137",
+                  "path": [
+                    "api",
+                    "MovimientosInventario",
+                    "1"
+                  ]
+                },
+                "description": "El controlador que construimos rechaza borrar movimientos históricos (400)."
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "04 - Reservas",
+          "item": [
+            {
+              "name": "01 GET - Listar reservas",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "https://localhost:7137/api/ReservasStock",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7137",
+                  "path": [
+                    "api",
+                    "ReservasStock"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "02 POST - Crear reserva",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 201\", () => pm.response.to.have.status(201));",
+                      "const j=pm.response.json(); if(j.idReserva) pm.collectionVariables.set(\"idReserva\",j.idReserva);"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"idProducto\": \"{{idProducto}}\",\n  \"idBodega\": \"{{idBodega}}\",\n  \"cantidad\": 2,\n  \"estado\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://localhost:7137/api/ReservasStock",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7137",
+                  "path": [
+                    "api",
+                    "ReservasStock"
+                  ]
+                },
+                "description": "Requiere stock suficiente disponible. Ajusta IDs a valores existentes."
+              },
+              "response": []
+            },
+            {
+              "name": "03 GET - Reserva por ID",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "https://localhost:7137/api/ReservasStock/1",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7137",
+                  "path": [
+                    "api",
+                    "ReservasStock",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "04 PUT - Actualizar reserva",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"idProducto\": \"{{idProducto}}\",\n  \"idBodega\": \"{{idBodega}}\",\n  \"cantidad\": 1,\n  \"estado\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://localhost:7137/api/ReservasStock/1",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7137",
+                  "path": [
+                    "api",
+                    "ReservasStock",
+                    "1"
+                  ]
+                },
+                "description": "El comportamiento depende de la implementación concreta de tu controlador; revisar estado y reglas de reserva."
+              },
+              "response": []
+            },
+            {
+              "name": "05 DELETE - Reserva (rechazo esperado)",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"Rechazo esperado HTTP 400\", () => pm.response.to.have.status(400));"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "https://localhost:7137/api/ReservasStock/1",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7137",
+                  "path": [
+                    "api",
+                    "ReservasStock",
+                    "1"
+                  ]
+                },
+                "description": "El controlador que construimos rechaza eliminar reservas históricas (400)."
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "PedidosDB",
+      "item": [
+        {
+          "name": "01 - Clientes",
+          "item": [
+            {
+              "name": "01 - GET listar",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "https://localhost:7204/api/Clientes",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7204",
+                  "path": [
+                    "api",
+                    "Clientes"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "02 - POST crear",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 201\", function () { pm.response.to.have.status(201); });",
+                      "if (pm.response.code === 201) {",
+                      "  const j = pm.response.json();",
+                      "  if (j.idCliente !== undefined) pm.collectionVariables.set(\"idCliente\", j.idCliente);",
+                      "}"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"nombres\": \"Cliente Prueba Coleccion\",\n  \"cedula\": \"1700000099\",\n  \"correo\": \"cliente.coleccion@example.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://localhost:7204/api/Clientes/3",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7204",
+                  "path": [
+                    "api",
+                    "Clientes",
+                    "3"
+                  ]
+                },
+                "description": "Usa cédula de prueba no repetida; no elimines clientes que tengan pedidos."
+              },
+              "response": []
+            },
+            {
+              "name": "03 - GET por ID",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "https://localhost:7204/api/Clientes/3",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7204",
+                  "path": [
+                    "api",
+                    "Clientes",
+                    "3"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "04 - PUT actualizar",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"nombres\": \"Cliente Actualizado Coleccion\",\n  \"cedula\": \"1700000099\",\n  \"correo\": \"cliente.actualizado@example.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://localhost:7204/api/Clientes/3",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7204",
+                  "path": [
+                    "api",
+                    "Clientes",
+                    "3"
+                  ]
+                },
+                "description": "Usa cédula de prueba no repetida; no elimines clientes que tengan pedidos."
+              },
+              "response": []
+            },
+            {
+              "name": "05 - DELETE eliminar (AL FINAL)",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "https://localhost:7204/api/Clientes/3",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7204",
+                  "path": [
+                    "api",
+                    "Clientes",
+                    "3"
+                  ]
+                },
+                "description": "Operación destructiva: ejecutar solo con registro de prueba sin dependencias. Usa cédula de prueba no repetida; no elimines clientes que tengan pedidos."
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "02 - Pedidos",
+          "item": [
+            {
+              "name": "01 - GET listar",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "https://localhost:7204/api/Pedidos",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7204",
+                  "path": [
+                    "api",
+                    "Pedidos"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "02 - POST crear",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 201\", function () { pm.response.to.have.status(201); });",
+                      "if (pm.response.code === 201) {",
+                      "  const j = pm.response.json();",
+                      "  if (j.idPedido !== undefined) pm.collectionVariables.set(\"idPedido\", j.idPedido);",
+                      "}"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"idCliente\": \"{{idCliente}}\",\n  \"estado\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://localhost:7204/api/Pedidos/5",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7204",
+                  "path": [
+                    "api",
+                    "Pedidos",
+                    "5"
+                  ]
+                },
+                "description": "Requiere cliente existente. No elimines pedido con detalles asociados."
+              },
+              "response": []
+            },
+            {
+              "name": "03 - GET por ID",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "https://localhost:7204/api/Pedidos/5",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7204",
+                  "path": [
+                    "api",
+                    "Pedidos",
+                    "5"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "04 - PUT actualizar",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"idCliente\": \"{{idCliente}}\",\n  \"estado\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://localhost:7204/api/Pedidos/5",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7204",
+                  "path": [
+                    "api",
+                    "Pedidos",
+                    "5"
+                  ]
+                },
+                "description": "Requiere cliente existente. No elimines pedido con detalles asociados."
+              },
+              "response": []
+            },
+            {
+              "name": "05 - DELETE eliminar (AL FINAL)",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "https://localhost:7204/api/Pedidos/5",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7204",
+                  "path": [
+                    "api",
+                    "Pedidos",
+                    "5"
+                  ]
+                },
+                "description": "Operación destructiva: ejecutar solo con registro de prueba sin dependencias. Requiere cliente existente. No elimines pedido con detalles asociados."
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "03 - DetallesPedido",
+          "item": [
+            {
+              "name": "01 - GET listar",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "https://localhost:7204/api/DetallesPedido",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7204",
+                  "path": [
+                    "api",
+                    "DetallesPedido"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "02 - POST crear",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 201\", function () { pm.response.to.have.status(201); });",
+                      "if (pm.response.code === 201) {",
+                      "  const j = pm.response.json();",
+                      "  if (j.idDetalle !== undefined) pm.collectionVariables.set(\"idDetalle\", j.idDetalle);",
+                      "}"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"idPedido\": \"{{idPedido}}\",\n  \"idProducto\": \"{{idProducto}}\",\n  \"cantidad\": 2,\n  \"precioUnitario\": 350.0\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://localhost:7204/api/DetallesPedido/4",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7204",
+                  "path": [
+                    "api",
+                    "DetallesPedido",
+                    "4"
+                  ]
+                },
+                "description": "Sustituye idPedido por uno existente y verifica el total del pedido después de cada cambio."
+              },
+              "response": []
+            },
+            {
+              "name": "03 - GET por ID",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "https://localhost:7204/api/DetallesPedido/4",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7204",
+                  "path": [
+                    "api",
+                    "DetallesPedido",
+                    "4"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "04 - PUT actualizar",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"idPedido\": \"{{idPedido}}\",\n  \"idProducto\": \"{{idProducto}}\",\n  \"cantidad\": 3,\n  \"precioUnitario\": 350.0\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://localhost:7204/api/DetallesPedido/4",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7204",
+                  "path": [
+                    "api",
+                    "DetallesPedido",
+                    "4"
+                  ]
+                },
+                "description": "Sustituye idPedido por uno existente y verifica el total del pedido después de cada cambio."
+              },
+              "response": []
+            },
+            {
+              "name": "05 - DELETE eliminar (AL FINAL)",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "https://localhost:7204/api/DetallesPedido/4",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7204",
+                  "path": [
+                    "api",
+                    "DetallesPedido",
+                    "4"
+                  ]
+                },
+                "description": "Operación destructiva: ejecutar solo con registro de prueba sin dependencias. Sustituye idPedido por uno existente y verifica el total del pedido después de cada cambio."
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "catalogoUrl",
+      "value": "https://localhost:7014"
+    },
+    {
+      "key": "inventarioUrl",
+      "value": "https://localhost:7137"
+    },
+    {
+      "key": "pedidosUrl",
+      "value": "https://localhost:7204"
+    },
+    {
+      "key": "idCategoria",
+      "value": "1"
+    },
+    {
+      "key": "idMarca",
+      "value": "1"
+    },
+    {
+      "key": "idProducto",
+      "value": "1"
+    },
+    {
+      "key": "idBodega",
+      "value": "1"
+    },
+    {
+      "key": "idExistencia",
+      "value": "1"
+    },
+    {
+      "key": "idMovimiento",
+      "value": "1"
+    },
+    {
+      "key": "idReserva",
+      "value": "1"
+    },
+    {
+      "key": "idCliente",
+      "value": "3"
+    },
+    {
+      "key": "idPedido",
+      "value": "5"
+    },
+    {
+      "key": "idDetalle",
+      "value": "4"
+    }
+  ]
+}

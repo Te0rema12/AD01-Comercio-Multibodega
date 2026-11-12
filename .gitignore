@@ -1,0 +1,67 @@
+# Visual Studio / IDE
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.rsuser
+
+# .NET build outputs
+**/bin/
+**/obj/
+[Dd]ebug/
+[Rr]elease/
+artifacts/
+TestResults/
+**/TestResults/
+*.trx
+coverage/
+coverage.*
+*.coverage
+*.coveragexml
+
+# Local packages and caches
+packages/
+*.nupkg
+.nuget/
+node_modules/
+
+# OS / temporary files
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.log
+*.tmp
+*.temp
+*.bak
+*~
+
+# Sensitive / local configuration
+.env
+.env.*
+!.env.example
+**/appsettings.Development.json
+**/appsettings.Local.json
+**/appsettings.*.local.json
+**/secrets.json
+*.pfx
+*.p12
+*.key
+*.pem
+*.snk
+
+# Local databases / generated files
+*.mdf
+*.ldf
+*.db
+*.sqlite
+*.sqlite3
+
+# Publish output
+publish/
+**/publish/
+
+# Note: appsettings.json remains tracked; review and remove secrets before committing.
+# Note: Keep .sln/.slnx, .csproj, source code, Postman JSON and final PDFs tracked.
